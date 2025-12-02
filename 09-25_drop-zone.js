@@ -18,9 +18,7 @@ const dropzones = [
 ];
 
 function dropzone(fire, dropzones) {
-    // if (dropzones[0][0])
-    console.log(dropzones[2][1]);
-    
+
 }
 
 dropzone(fire, dropzones);
