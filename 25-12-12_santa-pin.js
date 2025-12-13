@@ -24,15 +24,33 @@ const code3 = "[1+][2-]";
 function decodeSantaPin(code) {
   const arr = code.slice(0, -1).replaceAll("[", "").split("]");
   if (arr.length != 4) return null;
-  const decodeArr = arr.map((digit) => {
+  const decodeArr = arr.map((block, i) => {
+    console.log(block);
+    console.log(block.length);
+
     let num = 0;
-    for (const char of digit) {
-      console.log(char);
-      if (char.match(/[0-9]/g)) {
-        return char;
-      }
+    let operation = null;
+    if (block == "<") {
+      block = arr[i - 1];
     }
-    // return num;
+    if (block.length == 2) {
+      num = parseInt(block[0]);
+      if (block[1] == "+") {
+        return (num += 1);
+      } else if (block[1] == "-") {
+        return (num -= 1);
+      }
+    } else if (block.length == 3) {
+      num = parseInt(block[0]);
+      if (block[1] == "+") {
+        return (num += 2);
+      } else if (block[1] == "-") {
+        return (num -= 2);
+      }
+    } else {
+      num = parseInt(block[0]);
+      return num;
+    }
   });
   return decodeArr;
 }
