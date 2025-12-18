@@ -29,14 +29,24 @@
 // }
 
 function matchGloves(gloves) {
-  let uneven = {}
-  let pairs = {}
-  gloves.forEach((glove, i)=>{
-    const color = glove[color]
-    if (uneven(color)) {
-      if (uneven(color)[])
+  const invent = {};
+  const pairs = [];
+  for (let i = 0; i < gloves.length; i++) {
+    const color = gloves[i].color;
+    const hand = gloves[i].hand;
+    const oposite = hand === "L" ? "R" : "L";
+    if (!invent[color]) {
+      invent[color] = { [hand]: 1, [oposite]: 0 };
+    } else {
+      if (!invent[color][oposite]) {
+        invent[color][hand] = invent[color][hand] + 1;
+      } else {
+        invent[color][oposite] = invent[color][oposite] - 1;
+        pairs.push(color);
+      }
     }
-  })
+  }
+  return pairs;
 }
 
 const gloves = [
