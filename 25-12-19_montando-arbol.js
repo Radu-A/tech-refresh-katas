@@ -14,15 +14,23 @@ const array = [
 ];
 
 function drawTree(height, ornament, frequency) {
-  const lineLength = 1 + (2 * (height - 1)); // Ojo!!!!!!!!
+  const lineLength = 1 + 2 * (height - 1);
   const half = Math.floor(lineLength / 2);
-  const tree = []
+  let tree = "";
   for (let i = 0; i < height; i++) {
-	const whiteSpaces = half - j;
-	const leafs = 1 + (j * 2);
-	const line = ' '.repeat(whiteSpaces) + '*'.repeat(leafs) + ' '.repeat(whiteSpaces);
-	tree.push(line);
+    const whiteSpaces = half - i;
+    const leafs = 1 + i * 2;
+    const line =
+      " ".repeat(whiteSpaces) +
+      "*".repeat(leafs) +
+      " ".repeat(whiteSpaces) +
+      "\n";
+    tree = tree + line;
   }
+  const trunk = " ".repeat(half) + "#" + " ".repeat(half) + "\n";
+  tree += trunk;
+  console.log(tree);
+
   return "";
 }
 
