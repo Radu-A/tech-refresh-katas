@@ -27,23 +27,22 @@
 // to list the different band colors
 // Mnemonics map the colors to the numbers, that, when stored as an array, happen to map to their index in the array: Better Be Right Or Your Great Big Values Go Wrong.
 
-function decodedValue(exp: string): number {
-  const map = [
-    "black",
-    "brown",
-    "red",
-    "orange",
-    "yellow",
-    "green",
-    "blue",
-    "violet",
-    "grey",
-    "white",
-  ];
-  const [color1, color2]: string[] = exp.toLowerCase().split(" and ");
-  const first = map.indexOf(color1 ?? "");
-  const second = map.indexOf(color2 ?? "");
-  return Number(`${first}${second}`);
-}
+  function decodedValue(arr: string[]): number {
+    const map = [
+      "black",
+      "brown",
+      "red",
+      "orange",
+      "yellow",
+      "green",
+      "blue",
+      "violet",
+      "grey",
+      "white",
+    ];
+    const first = map.indexOf(arr[0] ?? "");
+    const second = map.indexOf(arr[1] ?? "");
+    return Number(`${first}${second}`);
+  }
 
-console.log(decodedValue("Black and white"));
+console.log(decodedValue(["brown", "black"]));
