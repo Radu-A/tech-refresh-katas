@@ -65,13 +65,19 @@ function decodedResistorValue(arr: string[]): string {
   const str2 = map.indexOf(arr[1] || "").toString();
   const str3 = map.indexOf(arr[2] || "");
   const num = Number(str1 + str2 + "0".repeat(str3));
+  if (num != 0 && num % 1000000000 == 0) {
+    return (num / 1000000000).toString() + " gigaohms";
+  }
+  if (num % 1000000 == 0) {
+    return (num / 1000000).toString() + " megaohms";
+  }
   if (num % 1000 == 0) {
     return (num / 1000).toString() + " kiloohms";
-  } else {
-    return num.toString() + " ohms";
   }
+  return num.toString() + " ohms";
 }
 
 decodedResistorValue(["red", "black", "red"]);
 decodedResistorValue(["yellow", "violet", "yellow"]);
 decodedResistorValue(["blue", "violet", "blue"]);
+decodedResistorValue(["white", "white", "white"]);
