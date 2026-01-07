@@ -15,8 +15,8 @@
 
 function toRna(dna: string): string {
   type DNA = "G" | "C" | "T" | "A";
-  type RNA = "C" | "G" | "A" | "A";
-  const transcriptor: Record<string, string> = {
+  type RNA = "C" | "G" | "A" | "U";
+  const transcriptor: Record<DNA, RNA> = {
     G: "C",
     C: "G",
     T: "A",
@@ -25,7 +25,6 @@ function toRna(dna: string): string {
   let rna: string = "";
   for (const nucleotide of dna) {
     if (nucleotide in transcriptor) {
-      // console.log("Fuck: Valid input DNA.");
       rna = rna + transcriptor[nucleotide];
     } else {
       return "Invalid input DNA.";
