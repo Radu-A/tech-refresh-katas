@@ -1,0 +1,24 @@
+{
+  "name": "25-09-26_tech-refresh-katas",
+  "version": "1.0.0",
+  "main": "06-28_binary_fingers.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Radu-A/tech-refresh-katas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Radu-A/tech-refresh-katas/issues"
+  },
+  "homepage": "https://github.com/Radu-A/tech-refresh-katas#readme",
+  "description": "",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
