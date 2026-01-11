@@ -10,10 +10,11 @@
 // "Whatever." This is what he answers to anything else.
 
 function hey(message: string): string {
-  if (/^\s*$/.test(message)) return "Fine. Be that way!";
-  if (/^[A-Z\s]+\?$/.test(message)) return "Calm down, I know what I'm doing!";
-  if (/\?$/.test(message)) return "Sure.";
-  if (/^(?=.*[A-Z])[A-Z0-9\s,.;:!]+$/.test(message)) return "Whoa, chill out!";
+  if (/^\s*$/.test(message.trim())) return "Fine. Be that way!";
+  if (/^[A-Z\s]+\?$/.test(message.trim()))
+    return "Calm down, I know what I'm doing!";
+  if (/\?$/.test(message.trim())) return "Sure.";
+  if (/^(?=.*[A-Z])[^a-z]+$/.test(message.trim())) return "Whoa, chill out!";
   return "Whatever.";
 }
 
