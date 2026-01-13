@@ -16,11 +16,9 @@ class Matrix {
 
   get columns(): string[][] {
     let matrix: string[][] = [];
-    for (const row of this.rows) {
-      let column = [];
-      for (const number of row) {
-        column.push(number);
-      }
+    for (let i = 0; i < this.rows.length; i++) {
+      let column: string[] = [];
+      for (let j = 0; j < column.length; j++) {}
       matrix.push(column);
     }
     return matrix;
