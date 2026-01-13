@@ -4,21 +4,32 @@ class Matrix {
     this.string = string;
   }
 
-  get rows(): object[] {
-    let rows: object[] = [];
+  get rows(): string[][] {
+    let matrix: string[][] = [];
     const strArr = this.string.split("\n");
     for (const str of strArr) {
       const row = str.split(" ");
-      rows.push(row);
+      matrix.push(row);
     }
-    return rows;
+    return matrix;
   }
 
-  get columns(): unknown {
-    throw new Error("Remove this line and implement the function");
+  get columns(): string[][] {
+    let matrix: string[][] = [];
+    for (const row of this.rows) {
+      let column = [];
+      for (const number of row) {
+        column.push(number);
+      }
+      matrix.push(column);
+    }
+    return matrix;
   }
 }
 
 const first = new Matrix("1 2\n3 4");
-console.log(first.rows[0]);
-
+console.log(first.rows[1]);
+console.log(first.columns[1]);
+const second = new Matrix("1 2\n10 20");
+console.log(second.rows[1]);
+console.log(second.columns[1]);
