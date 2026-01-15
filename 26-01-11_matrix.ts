@@ -16,10 +16,14 @@ class Matrix {
 
   get columns(): string[][] {
     let matrix: string[][] = [];
-    for (let i = 0; i < this.rows.length; i++) {
-      let column: string[] = [];
-      for (let j = 0; j < column.length; j++) {}
-      matrix.push(column);
+    if (this.rows !== undefined) {
+      for (let i = 0; i < this.rows.length; i++) {
+        let column: string[] = [];
+        for (let j = 0; j < this.rows[i]!.length; j++) {
+          column.push(this.rows[j]![i]!);
+        }
+        matrix.push(column);
+      }
     }
     return matrix;
   }
