@@ -5,11 +5,13 @@ const matrix = [
 ];
 
 function invertMatrix(init: number[][]): number[][] {
+  if (!init.length || !init[0]) return [];
   let inverted: number[][] = [];
-  for (let i = 0; i < init.length; i++) {
-    let row: number[] = [];
-    for (let j = 0; j < init[i]!.length; j++) {
-      row.push(init[j]![i]!);
+  const colNumber = init[0];
+  for (let i = 0; i < colNumber.length; i++) {
+    let row = [];
+    for (let j = 0; j < init.length; j++) {
+      row.push(init[j][i]);
     }
     inverted.push(row);
   }

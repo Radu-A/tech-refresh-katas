@@ -4,26 +4,23 @@ class Matrix {
     this.string = string;
   }
 
-  get rows(): string[][] {
-    let matrix: string[][] = [];
+  get rows(): number[][] {
+    let matrix: number[][] = [];
     const strArr = this.string.split("\n");
     for (const str of strArr) {
-      const row = str.split(" ");
+      const row = str.split(" ").map(value=>Number(value))
       matrix.push(row);
     }
     return matrix;
   }
 
-  get columns(): string[][] {
-    let matrix: string[][] = [];
-    if (this.rows !== undefined) {
-      for (let i = 0; i < this.rows.length; i++) {
-        let column: string[] = [];
-        for (let j = 0; j < this.rows[i]!.length; j++) {
-          column.push(this.rows[j]![i]!);
-        }
-        matrix.push(column);
-      }
+  get columns(): number[][] {
+    let matrix: number[][] = [];
+    if (this.rows.length! && this.rows[0]) {
+      matrix = this.rows[0].map((_, i) => {
+        const row = this.rows.map((row) => row[i]);
+        return row;
+      });
     }
     return matrix;
   }
