@@ -9,7 +9,12 @@
 // The names must be random: they should not follow a predictable sequence. Using random names means a risk of collisions. Your solution must ensure that every existing robot has a unique name.
 
 class Robot {
-  constructor() {}
+  name: string;
+  usedNames: string[];
+  constructor() {
+    this.name = this.generateName();
+    this.usedNames = [this.name];
+  }
 
   private generateName(): string {
     const first = String.fromCharCode(Math.floor(Math.random() * 26) + 65);
@@ -20,16 +25,17 @@ class Robot {
     return first + second + number;
   }
 
-  public get name(): string {
-    return this.generateName();
-  }
+  // public get name(): string {
+  //   return this.name;
+  // }
 
   public resetName(): void {
-    const previousName = this.name;
     let newName = "";
     do {
       newName = this.generateName();
-    } while (previousName === newName);
+    } while (this.usedNames.some((name) => name === newName));
+    this.name = newName;
+    this.usedNames = [...this.usedNames, this.name];
   }
 
   public static releaseNames(): string {
