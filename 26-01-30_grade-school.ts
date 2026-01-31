@@ -13,26 +13,39 @@
 // "Let me think. We have Anna, Barb, and Charlie in grade 1, Alex, Peter, and Zoe in grade 2, and Jim in grade 5. So the answer is: Anna, Barb, Charlie, Alex, Peter, Zoe, and Jim."
 // Note that all our students only have one name (it's a small town, what do you want?), and each student cannot be added more than once to a grade or the roster. If a test attempts to add the same student more than once, your implementation should indicate that this is incorrect.
 
-type MyGrades = '1' | '2' | '3' | '4' | '5' | '6'
+type MyGrades = "1" | "2" | "3" | "4" | "5" | "6";
 
 // interface rosterInterface {
-//    [keyof: MyGrades]: string[]
+//    [keyof: string]: string[]
 // }
 
-type rosterData = Record<string, string[]>
+type rosterData = Record<string, string[]>;
 
 class GradeSchool {
-  students: rosterData = {};
+  gradeList?: {[keyof: string]: string[]} = {}
 
   roster() {
-    // const sorted = this.students.sort();
-    // return sorted;
+    let sorted: {[keyof: string]: string[]} = {};
+    for (let grade in this.gradeList) {
+      const gradeSorted = this.gradeList[grade].sort();
+      sorted = { ...sorted, gradeSorted };
+    }
   }
   add(name: string, grade: number) {
-    
+    if (!this.gradeList) {
+      this.gradeList = { [grade]: [name] };
+    } else {
+      if (this.gradeList[grade]) {
+        this.gradeList[grade] = [...this.gradeList[grade], name];
+      } else {
+        this.gradeList = { ...this.gradeList, [grade]: [name] };
+      }
+    }
   }
-
-  grade() {}
+  grade(grade: number) {
+    if (this.gradeList && this.gradeList[grade]) return this.gradeList[grade];
+    return {};
+  }
 }
 const set = new Set();
 
