@@ -23,7 +23,6 @@ type rosterData = Record<string, string[]>;
 
 class GradeSchool {
   private gradeList?: { [keyof: string]: string[] } = {};
-
   // ** ROSTER CANNOT BE MODIFIED OUTSIDE OF MODULE **
   roster() {
     let publicGradeList: { [keyof: string]: string[] } = {};
@@ -50,13 +49,11 @@ class GradeSchool {
         this.gradeList = { ...this.gradeList, [grade]: [name] };
       }
     }
-    for (let grade in this.gradeList) {
-      const gradeSorted: string[] = this.gradeList[grade].sort();
-      this.gradeList = { ...this.gradeList, [grade]: gradeSorted };
-    }
+    this.gradeList[grade].sort();
   }
   grade(grade: number) {
-    if (this.gradeList && this.gradeList[grade]) return this.gradeList[grade];
+    if (this.gradeList && this.gradeList[grade])
+      return structuredClone(this.gradeList[grade]);
     return [];
   }
 }
