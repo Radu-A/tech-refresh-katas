@@ -23,23 +23,33 @@ type rosterData = Record<string, string[]>;
 
 class GradeSchool {
   private gradeList?: { [keyof: string]: string[] } = {};
-  readonly publicGradeList = this.gradeList;
 
   // ** ROSTER CANNOT BE MODIFIED OUTSIDE OF MODULE **
   roster() {
-    return this.publicGradeList;
+    let publicGradeList: { [keyof: string]: string[] } = {};
+    for (let grade in this.gradeList) {
+      const gradeArray = [...this.gradeList[grade]];
+      publicGradeList = { ...publicGradeList, [grade]: gradeArray };
+    }
+    return publicGradeList;
   }
   add(name: string, grade: number) {
     if (!this.gradeList) {
       this.gradeList = { [grade]: [name] };
     } else {
+      let isStudent = false;
+      for (let grade in this.gradeList) {
+        if (this.gradeList[grade].find((student) => student === name)) {
+          const index = this.gradeList[grade].indexOf(name);
+          this.gradeList[grade].splice(index, 1);
+        }
+      }
       if (this.gradeList[grade]) {
         this.gradeList[grade] = [...this.gradeList[grade], name];
       } else {
         this.gradeList = { ...this.gradeList, [grade]: [name] };
       }
     }
-    let sorted: { [keyof: string]: string[] } = {};
     for (let grade in this.gradeList) {
       const gradeSorted: string[] = this.gradeList[grade].sort();
       this.gradeList = { ...this.gradeList, [grade]: gradeSorted };
@@ -50,23 +60,27 @@ class GradeSchool {
     return [];
   }
 }
-const set = new Set();
 
 const school = new GradeSchool();
 // console.log(school.roster());
 // school.add("Franklin", 5);
 // school.add("Bradley", 5);
 // school.add("Jeff", 1);
-school.add("Aimee", 2);
-const roster = school.roster();
-console.log(school.roster());
-
-if (roster) {
-  try {
-    roster[2].push("Oops.");
-  } catch {
-    /* empty */
-  }
-}
-console.log(school.roster());
 // console.log(school.grade(5));
+
+// school.add("Aimee", 2);
+// const roster = school.roster();
+// console.log(school.roster());
+
+// if (roster) {
+//   try {
+//     roster[2].push("Oops.");
+//   } catch {
+//     /* empty */
+//   }
+// }
+// console.log(school.roster());
+
+school.add("Aimee", 2);
+school.add("Aimee", 1);
+console.log(school.grade(1));
